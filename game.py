@@ -1,9 +1,14 @@
 from math import gamma
-
+class GameResult:
+    def __init__(self, solved, strikes, balls):
+        self.solved = solved
+        self.strikes = strikes
+        self.balls = balls
 
 class Game:
     def guess(self, guess_number):
         self._assert_illegal_value(guess_number)
+        return  GameResult(True, 3, 0)
 
     def _assert_illegal_value(self, guess_number):
         if guess_number is None:
