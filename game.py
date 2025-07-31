@@ -1,14 +1,40 @@
 from math import gamma
 class GameResult:
     def __init__(self, solved, strikes, balls):
-        self.solved = solved
-        self.strikes = strikes
-        self.balls = balls
+        self._solved = solved
+        self._strikes = strikes
+        self._balls = balls
+
+    @property
+    def solved(self):
+        return self._solved
+
+    @property
+    def strikes(self):
+        return self._strikes
+
+    @property
+    def balls(self):
+        return self._balls
 
 class Game:
+    def __init__(self):
+        self._question = ""
+
+    @property
+    def question(self):
+        raise AttributeError("읽을 수 없는 속성")
+
+    @question.setter
+    def question(self, value):
+        self._question = value
+
     def guess(self, guess_number):
         self._assert_illegal_value(guess_number)
-        return  GameResult(True, 3, 0)
+        if guess_number == self._question:
+            return  GameResult(True, 3, 0)
+        else:
+            return None
 
     def _assert_illegal_value(self, guess_number):
         if guess_number is None:
