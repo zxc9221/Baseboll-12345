@@ -20,7 +20,11 @@ class Game:
         if guess_number == self._question:
             return GameResult(True, 3, 0)
         else:
-            return GameResult(False, 0, 0)
+            strikes = sum(q == g for q, g in zip(self._question, guess_number))
+
+
+            balls = sum(g in self._question for g in guess_number) - strikes
+            return GameResult(False, strikes, balls)
 
     def _assert_illegal_value(self, guess_number):
         if guess_number is None:
